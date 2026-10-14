@@ -1,0 +1,13 @@
+dataset_registry: ../../dataset2feature.yaml
+ckpt_dir: ${VLA_EVAL_CHECKPOINT}
+dataset_entry: robotwin_aloha_agilex
+# Replace this example with your training stats path, or override via --stats_file.
+# Keep info.json, tasks.jsonl and episodes.jsonl in the same meta directory.
+stats_file: /absolute/path/to/your/robotwin_dataset/meta/stats.json
+inference_mode: direct_action
+window_size: 1
+num_denoised_steps: 5
+max_pad_state_and_action_length: 64
+host: 127.0.0.1
+port: 8000
+seed: 42

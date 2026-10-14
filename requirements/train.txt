@@ -1,0 +1,31 @@
+# Install torch/torchvision for the intended CUDA runtime before this file.
+# Use the adapted LeRobot dataset modules bundled in the repository's lerobot/.
+transformers==4.57.1
+diffusers==0.35.2
+accelerate==1.6.0
+deepspeed==0.15.4
+peft==0.17.1
+qwen-vl-utils==0.0.14
+# RoboTwin v2.1 Parquet metadata uses the List feature unavailable in 3.6.0.
+datasets==4.8.5
+av==12.3.0
+wandb==0.29.0
+tensorboard==2.19.0
+numpy==2.2.6
+scipy==1.15.3
+pyarrow==25.0.1
+pillow>=10,<13
+PyYAML>=6,<7
+h5py>=3.10,<4
+safetensors>=0.4.3,<1
+einops>=0.8,<1
+websockets==15.0.1
+msgpack>=1.0,<2
+orjson>=3.10,<4
+# The bundled LeRobot dataset reader's runtime dependencies (robot control
+# and unrelated policy extras are intentionally not installed).
+jsonlines>=4,<5
+pandas>=2.2,<3
+opencv-python>=4.9,<6
+imageio[ffmpeg]>=2.34,<3
+termcolor>=2.4,<3

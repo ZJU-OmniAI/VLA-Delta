@@ -1,0 +1,105 @@
+# Paths are relative to this file. Use --dataset_registry for a private copy.
+droid_mixed:
+  dataset_type: vla
+  dataset_adapter: mixed_pretraining
+  dataset_kind: droid
+  embedded_images: false
+  video_backend: pyav
+  target_text_field: train_data
+  camera_keys:
+  - observation.images.exterior_1_left
+  - observation.images.wrist_left
+  stats_key: droid
+  use_quantile: true
+  sample_ratio: 1.0
+  dataset_path: data/pretrain/droid
+  aux_dataset_identity: droid
+  optical_flow_data_root: data/pretrain/droid/optical_flow/droid
+  optical_flow_manifest: manifest.jsonl
+  flow_delta_frames: 20
+  annotation_root: data/annotations/droid
+  allow_unannotated_episodes: true
+household_mixed:
+  dataset_type: vla
+  dataset_adapter: mixed_pretraining
+  dataset_kind: molmo
+  embedded_images: true
+  target_text_field: train_data
+  camera_keys:
+  - first_view
+  - wrist_image
+  stats_key: household
+  use_quantile: true
+  sample_ratio: 1.0
+  flow_delta_frames: 20
+  dataset_path: data/pretrain/household
+  aux_dataset_identity: molmoact_household
+  optical_flow_data_root: data/pretrain/household/optical_flow/molmoact_household
+  optical_flow_manifest: manifest.jsonl
+  annotation_root: data/annotations/molmoact_household
+  allow_unannotated_episodes: false
+tabletop_mixed:
+  dataset_type: vla
+  dataset_adapter: mixed_pretraining
+  dataset_kind: molmo
+  embedded_images: true
+  target_text_field: train_data
+  camera_keys:
+  - first_view
+  - wrist_image
+  stats_key: tabletop
+  use_quantile: true
+  sample_ratio: 1.0
+  flow_delta_frames: 20
+  dataset_path: data/pretrain/tabletop
+  aux_dataset_identity: molmoact_tabletop
+  optical_flow_data_root: data/pretrain/tabletop/optical_flow/molmoact_tabletop
+  optical_flow_manifest: manifest.jsonl
+  annotation_root: data/annotations/molmoact_tabletop
+  allow_unannotated_episodes: false
+rh20t_mixed:
+  dataset_type: vla
+  dataset_adapter: mixed_pretraining
+  dataset_kind: rh20t
+  embedded_images: false
+  video_backend: pyav
+  target_text_field: train_data
+  camera_keys:
+  - observation.images.exterior_1_left
+  - observation.images.wrist_left
+  stats_key: rh20t
+  use_quantile: true
+  sample_ratio: 1.0
+  flow_delta_frames: 20
+  dataset_path: data/pretrain/rh20t
+  aux_dataset_identity: rh20t
+  optical_flow_data_root: data/pretrain/rh20t/optical_flow/rh20t
+  optical_flow_manifest: manifest.jsonl
+  annotation_root: data/annotations/rh20t
+  allow_unannotated_episodes: false
+libero_wo_ecot_pt:
+  # Set your own training dataset root; normalization is read from <dataset_path>/meta/stats.json.
+  dataset_path: data/libero
+  dataset_type: vla
+  sample_ratio: 1.0
+  use_quantile: true
+robotwin_aloha_agilex:
+  # Converted LeRobot v2 training data; must match evaluation's native 14D joint actions.
+  dataset_path: data/robotwin
+  dataset_type: vla
+  dataset_adapter: lerobot_v2
+  benchmark: robotwin
+  sample_ratio: 1.0
+  use_quantile: true
+  video_backend: pyav
+demo_data.libero_v21:
+  # Legacy registry key retained for compatibility; this contains metadata only.
+  dataset_path: stats/demo_libero
+  dataset_type: vla
+  sample_ratio: 1.0
+  use_quantile: true
+demo_data.robotwin2.0-aloha-agilex:
+  dataset_path: stats/robotwin2.0-aloha-agilex
+  dataset_type: vla
+  sample_ratio: 1.0
+  use_quantile: true

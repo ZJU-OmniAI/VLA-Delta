@@ -1,0 +1,15 @@
+extends: common.yaml
+training_stage: stage1_ar
+vlm_name_or_path: ${VLA_BASE_MODEL}
+output_ckpt_dir: ${VLA_OUTPUT_ROOT}/stage1_ar
+tensorboard_log_dir: ${VLA_OUTPUT_ROOT}/stage1_ar/tensorboard
+wandb_dir: ""
+# Example schedule only; not the released model's actual pretraining duration.
+max_train_steps: 100
+save_step_interval: 100
+peak_learning_rate: 1.0e-05
+vlm_loss_weight: 1.0
+slot_loss_weight: 0.0
+optical_flow_loss_weight: 0.0
+action_expert_loss_weight: 0.0
+tune_vlm: true

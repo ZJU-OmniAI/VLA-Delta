@@ -1,0 +1,14 @@
+dataset_registry: ../../dataset2feature.yaml
+ckpt_dir: ${VLA_EVAL_CHECKPOINT}
+dataset_entry: libero_wo_ecot_pt
+# Published LIBERO model only; stats and companion metadata live in stats/demo_libero/meta.
+# For your model, set your computed training stats path
+# here or pass --stats_file /absolute/path/to/your/training_dataset/meta/stats.json.
+stats_file: ../../stats/demo_libero/meta/stats.json
+inference_mode: direct_action
+window_size: 1
+num_denoised_steps: 5
+max_pad_state_and_action_length: 64
+host: 127.0.0.1
+port: 8000
+seed: 42

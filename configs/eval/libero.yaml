@@ -1,0 +1,7 @@
+benchmark: libero
+output_dir: ../../outputs/eval/libero
+host: 127.0.0.1
+port: 8000
+trials: 50
+execution_horizon: 10
+seed: 7

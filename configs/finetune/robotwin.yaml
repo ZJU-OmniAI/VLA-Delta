@@ -1,0 +1,9 @@
+# Same public trainer, checkpoint exports and resume path as LIBERO.
+extends: common.yaml
+dataset_entries:
+- robotwin_aloha_agilex
+action_horizon: 16
+wandb_group: ""
+output_ckpt_dir: ${VLA_OUTPUT_ROOT}/robotwin
+tensorboard_log_dir: ${VLA_OUTPUT_ROOT}/robotwin/tensorboard
+wandb_dir: ""

@@ -1,0 +1,29 @@
+# Separate Python 3.10 environment. See README.md for CUDA extensions.
+torch==2.4.1
+torchvision==0.19.1
+numpy==1.26.4
+sapien==3.0.0b1
+mplib==0.2.1
+scipy==1.10.1
+# CuRobo pulls scikit-image; 0.25+ would upgrade the pinned SciPy.
+scikit-image>=0.21,<0.25
+transforms3d==0.4.2
+gymnasium==0.29.1
+trimesh==4.4.3
+open3d==0.18.0
+imageio==2.34.2
+imageio-ffmpeg>=0.4,<0.6
+h5py>=3.10,<4
+PyYAML>=6,<7
+pillow>=10,<13
+websockets==15.0.1
+msgpack>=1.0,<2
+termcolor>=2,<3
+huggingface-hub>=0.25,<1
+warp-lang==1.12.0
+toppra>=0.6,<0.7
+opencv-python>=4.9,<4.12
+yourdfpy==0.0.56
+usd-core==24.11
+easydict>=1.9,<2
+av>=12,<13

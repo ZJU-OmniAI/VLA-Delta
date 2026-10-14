@@ -1,0 +1,55 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.DS_Store
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+# Private configuration and credentials
+*.local.yaml
+*.local.json
+.netrc
+*.pem
+# Downloaded sources, datasets and generated experiment artifacts
+/data/
+/demo_data/
+/models/
+/checkpoints/
+/outputs/
+/result/
+/fast/
+/LIBERO/
+# Downloaded simulators only; the bundled /lerobot/ source is versioned.
+/third_party/
+/temp/
+/images/
+/simple_scripts/
+wandb/
+runs/
+logs/
+*.log
+*.safetensors
+*.bin
+*.arrow
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.hdf5
+*.h5
+*.parquet
+*.npy
+*.npz
+# Build output
+build/
+dist/
+
+tests

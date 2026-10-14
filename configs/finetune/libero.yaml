@@ -1,0 +1,8 @@
+extends: common.yaml
+dataset_entries:
+- libero_wo_ecot_pt
+action_horizon: 10
+wandb_group: ""
+output_ckpt_dir: ${VLA_OUTPUT_ROOT}/libero
+tensorboard_log_dir: ${VLA_OUTPUT_ROOT}/libero/tensorboard
+wandb_dir: ""

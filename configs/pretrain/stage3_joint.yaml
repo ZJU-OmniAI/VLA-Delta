@@ -1,0 +1,26 @@
+extends: common.yaml
+training_stage: stage3_joint
+vlm_name_or_path: ${VLA_STAGE2_CHECKPOINT}
+output_ckpt_dir: ${VLA_OUTPUT_ROOT}/stage3_joint
+tensorboard_log_dir: ${VLA_OUTPUT_ROOT}/stage3_joint/tensorboard
+wandb_dir: ""
+# Example schedule only; not the released model's actual pretraining duration.
+max_train_steps: 100
+save_step_interval: 100
+peak_learning_rate: 1.0e-05
+vlm_loss_weight: 1.0
+slot_loss_weight: 0.1
+optical_flow_loss_weight: 1.0
+action_expert_loss_weight: 5.0
+tune_vlm: true
+init_from_checkpoint: ${VLA_STAGE2_CHECKPOINT}
+slot_aux_type: structured_slots_v1
+slot_supervision_dir: ${VLA_PREPARED_ROOT}
+optical_flow_aux_type: dense_regression_v1
+optical_flow_data_root: ${VLA_PREPARED_ROOT}
+flow_delta_frames: 20
+stage2_aux_sampling: slot_valid
+tune_action_expert: true
+action_expert_name_or_path: ${VLA_BASE_MODEL}
+action_horizon: 50
+allow_aux_loss_weight_override: true

@@ -1,0 +1,7 @@
+dataset_registry: ../../dataset2feature.yaml
+dataset_entries:
+- droid_mixed
+- household_mixed
+- tabletop_mixed
+- rh20t_mixed
+output_root: ${VLA_PREPARED_ROOT}

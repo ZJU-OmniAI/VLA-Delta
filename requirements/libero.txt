@@ -1,0 +1,26 @@
+# Separate Python 3.8 environment; matches the inspected simulation environment.
+# Install CPU torch==1.11.0 separately, then external LIBERO with --no-deps.
+numpy==1.22.4
+robosuite==1.4.0
+mujoco==3.2.3
+robomimic==0.2.0
+bddl==1.0.1
+# bddl.backend_abc imports future.utils but omits it from package metadata.
+future==0.18.2
+gym==0.25.2
+hydra-core==1.2.0
+easydict==1.9
+cloudpickle==2.1.0
+opencv-python==4.6.0.66
+imageio==2.35.1
+imageio-ffmpeg>=0.4,<0.6
+pillow==10.4.0
+numba==0.58.1
+tyro==1.0.16
+websockets==13.1
+msgpack==1.1.1
+PyYAML>=6,<7
+scipy<1.11
+h5py<3.12
+termcolor<3
+matplotlib<3.8
