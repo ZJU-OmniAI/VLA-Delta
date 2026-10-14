@@ -4,13 +4,12 @@
   <p>
     <!-- TODO: Replace this href with the paper URL. -->
     <a href="#resource-links" title="Paper — coming soon"><img src="https://img.shields.io/badge/arXiv-Paper-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="Paper — coming soon"></a>
-    <!-- TODO: Replace this href with the project page URL. -->
-    <a href="#resource-links" title="Project page — coming soon"><img src="https://img.shields.io/badge/-Project_Page-0F5354?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="Project page — coming soon"></a>
+    <a href="https://zju-omniai.github.io/VLA-Delta/" title="Project page"><img src="https://img.shields.io/badge/-Project_Page-0F5354?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="Project page"></a>
     <!-- TODO: Replace this href with the Hugging Face URL. -->
     <a href="#resource-links" title="Hugging Face — coming soon"><img src="https://img.shields.io/badge/-Hugging_Face-FFD21E?style=for-the-badge&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face — coming soon"></a>
   </p>
   <a id="resource-links"></a>
-  <p><sub>Paper, project page, and Hugging Face links coming soon.</sub></p>
+  <p><sub>Paper and Hugging Face links coming soon.</sub></p>
 </div>
 
 

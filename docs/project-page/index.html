@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f5f9f">
+  <title>VLA-Δ: Learning Physical State Transition for Vision-Language-Action Models | Project Page</title>
+  <meta name="description" content="VLA-Δ uses physical state transitions as explicit learning targets, combining Structured Transition Slots, Optical Flow and Future-State Difference Text for continuous action generation.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VLA-Δ: Learning Physical State Transition for Vision-Language-Action Models">
+  <meta property="og:description" content="Learning how the world should change helps robots learn how to act.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014-github-link">
+  <script src="assets/js/site-config.js?v=20261014-github-link" defer></script>
+  <script src="assets/js/main.js?v=20261014-github-link" defer></script>
+  <script src="assets/js/real-robot-chart.js?v=20261013-native-chart" defer></script>
+  <script src="assets/js/video-carousel.js?v=20261014-video-controls" defer></script>
+  <script src="assets/js/annotation-animation.js?v=20261013-auto-only" defer></script>
+  <script src="assets/js/text-reveal.js?v=20261013-auto-only" defer></script>
+  <script src="assets/js/pipeline-animation.js?v=20261013-auto-only" defer></script>
+  <script src="assets/js/scroll-reveal.js?v=microwave-20261013-scroll-reveal" defer></script>
+  <script src="assets/js/motivation-video.js?v=20261014-microwave-square" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner container">
+      <a class="wordmark" href="#top" aria-label="VLA-Delta, back to top"><img class="wordmark-logo" data-project-logo src="assets/images/vla-delta-logo-transparent.png" width="1254" height="1254" alt="VLA-Δ logo" decoding="async"><span>VLA-Δ</span></a>
+      <nav class="navigation" aria-label="Page sections">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#real-robot">Real robot</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="paper-title">
+      <p class="eyebrow">Multilevel Physical State Transition Learning</p>
+      <h1 id="paper-title" data-project-title><span class="title-project"><img class="project-logo" data-project-logo src="assets/images/vla-delta-logo-transparent.png" width="1254" height="1254" alt="VLA-Δ logo" decoding="async" fetchpriority="high">VLA-Δ:</span> Learning Physical State Transition for Vision-Language-Action Models</h1>
+      <p class="tagline" data-tagline>Learning how the world should change helps robots learn how to act.</p>
+      <div class="authors" data-authors aria-label="Authors">
+        <span class="author">Qi Lu</span><span class="author">Jiarun Li</span><span class="author">Ce Zhang</span><span class="author">Miao Pan</span><span class="author">Yi Pan</span><span class="author">Xu Wang</span><span class="author">Wenqi Zhang</span><span class="author">Xuhong Zhang</span>
+      </div>
+      <div class="affiliations" data-affiliations>
+        <span><a href="https://www.zju.edu.cn/" target="_blank" rel="noopener noreferrer">Zhejiang University</a> <span class="domain">(zju.edu.cn)</span></span>
+      </div>
+      <div class="resources" aria-label="Project resources">
+        <a class="resource primary" href="https://github.com/ZJU-OmniAI/VLA-Delta" target="_blank" rel="noopener noreferrer" data-resource="github">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>GitHub</span>
+        </a>
+        <span class="resource unavailable" aria-disabled="true" data-resource="code">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 18"/></svg><span>Code — Coming Soon</span>
+        </span>
+        <span class="resource unavailable" aria-disabled="true" data-resource="arxiv">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 8 8 8m0-8-8 8"/></svg><span>arXiv — Coming Soon</span>
+        </span>
+      </div>
+    </section>
+
+    <div class="teaser container">
+      <div class="hero-video" data-hero-video>
+        <video data-hero-player controls playsinline preload="none" width="1920" height="1080" src="Video/vla-delta-intro-en/vla-delta-intro-en.mp4?v=20261014-hero-intro" poster="Video/vla-delta-intro-en/cover.png?v=20261014-hero-intro" aria-label="VLA-Δ paper introduction with English narration">
+          <a href="Video/vla-delta-intro-en/vla-delta-intro-en.mp4">Open the VLA-Δ introduction video</a>
+        </video>
+      </div>
+    </div>
+
+    <section class="section container" id="overview" aria-labelledby="overview-heading">
+      <div class="section-heading"><p class="eyebrow">01 · Introduction</p><h2 id="overview-heading">Why physical state transitions matter</h2></div>
+      <div class="motivation-layout" id="motivation">
+        <figure class="motivation-figure" aria-labelledby="motivation-caption">
+          <video class="motivation-video" data-motivation-video controls muted playsinline preload="none" width="1024" height="1024" src="assets/videos/motivation/microwave-bowl-failure.mp4?v=20261014-contact-v1" poster="assets/videos/motivation/microwave-bowl-poster.png?v=20261014-contact-v1" aria-label="Conceptual animation: the gripper closes too early, continues forward until the closed jaws touch the bowl rim without grasping it, then moves empty to the table while the bowl stays in the microwave." aria-describedby="motivation-caption">
+            <a href="assets/videos/motivation/microwave-bowl-failure.mp4?v=20261014-contact-v1" data-motivation-download>Open the conceptual animation (MP4)</a>
+          </video>
+          <figcaption id="motivation-caption"><span>Conceptual animation · not experimental footage.</span><a class="full-size" href="assets/videos/motivation/microwave-bowl-failure.mp4?v=20261014-contact-v1" download data-motivation-download>Download MP4 ↓</a></figcaption>
+        </figure>
+        <div class="overview-copy">
+        <p>VLAs may close the gripper before reaching the target object, or continue toward the placement location after a failed grasp. These failures suggest that a policy may replay a memorized trajectory rather than respond to the evolving scene. Most VLAs <span class="emphasis">lack explicit supervision of intermediate physical state changes</span>. VLA-Δ uses these changes as explicit learning targets, combining task semantics and visual motion to learn how the robot and its environment should change as the task progresses.</p>
+        </div>
+      </div>
+      <figure class="paper-figure" data-figure="overview">
+        <a class="image-link" href="assets/images/overview.png" target="_blank" rel="noopener" data-full-size aria-label="Open the transition modeling overview at full resolution">
+          <picture><source srcset="assets/images/overview-1200.webp 1200w, assets/images/overview.webp 2605w" sizes="(max-width: 640px) calc(100vw - 60px), (max-width: 1088px) calc(100vw - 90px), 998px" type="image/webp"><img src="assets/images/overview.png" width="2605" height="1121" alt="Comparison of transition modeling paradigms: Direct VLA, Reasoning VLA, World Action Models (WAMs), Latent-WAMs, and VLA-Delta with multilevel physical state-transition supervision." loading="lazy" decoding="async"></picture>
+        </a>
+      </figure>
+      <ol class="contributions" aria-label="Main contributions">
+        <li><h3>Physical state-transition learning</h3><p>Models task semantics and visual motion changes for continuous action generation.</p></li>
+        <li><h3>Automated data annotation pipeline</h3><p>Multilevel physical state-transition annotations from ≈484 hours and 24 million frames of robot demonstrations.</p></li>
+        <li><h3>Simulation and real-robot experiments</h3><p>Outperforms compared methods on LIBERO and RoboTwin, and π<sub>0.5</sub> in real-robot experiments.</p></li>
+      </ol>
+    </section>
+
+    <section class="section container" id="method" aria-labelledby="method-heading">
+      <div class="section-heading"><p class="eyebrow">02 · Method</p><h2 id="method-heading">Multilevel Physical State Transition Learning</h2><p class="section-lead">Physical State Difference Queries organize vision-language information into a physical state-transition representation. The action expert combines this representation with the independently encoded robot proprioceptive state to predict a continuous action chunk via flow matching.</p></div>
+      <figure class="paper-figure" data-figure="architecture">
+        <a class="image-link" href="assets/images/architecture.png" target="_blank" rel="noopener" data-full-size aria-label="Open the VLA-Delta architecture at full resolution"><picture><source srcset="assets/images/architecture-1200.webp 1200w, assets/images/architecture.webp 2870w" sizes="(max-width: 640px) calc(100vw - 60px), (max-width: 1088px) calc(100vw - 90px), 998px" type="image/webp"><img src="assets/images/architecture.png" width="2870" height="1026" alt="Overall architecture of VLA-Delta: multi-view observations and a task instruction feed the Qwen3-VL backbone with Physical State Difference Queries. Structured Transition Slots, Optical Flow and Future-State Difference Text supervise the transition representation; the action expert also receives robot state. The right panel shows attention-visibility constraints." loading="lazy" decoding="async"></picture></a>
+        <figcaption class="figure-caption-row"><span><strong>Overall architecture of VLA-Δ.</strong> The model uses Qwen3-VL-2B-Instruct and a 9-layer Diffusion Transformer. Direct prediction reads designated Query hidden states to predict Structured Transition Slots and dense Optical Flow. Future-State Difference Text positions attend only to the Queries and preceding text.</span><a class="full-size" href="assets/images/architecture.png" target="_blank" rel="noopener" data-full-size>View full-size ↗</a></figcaption>
+      </figure>
+      <div class="supervision">
+        <article><span class="number">Predefined state variables</span><h3>Structured Transition Slots</h3><p>Nine categories of task-relevant state variables and their changes provide direct supervision for learning physically meaningful transition representations.</p></article>
+        <article><span class="number">Dense visual motion</span><h3>Optical Flow</h3><p>Dense two-dimensional displacements between current and subsequent observations from the same viewpoint encourage Queries to preserve local motion details.</p></article>
+        <article><span class="number">Coherent task semantics</span><h3>Future-State Difference Text</h3><p>Coherent natural language describes task progress, spatial changes, contact transitions and associated constraints, relating local state changes to overall task progression.</p></article>
+      </div>
+      <figure class="paper-figure annotation-sequence" data-annotation-animation aria-labelledby="annotation-sequence-heading">
+        <div class="annotation-toolbar">
+          <h3 id="annotation-sequence-heading">Physical state-transition annotations</h3>
+        </div>
+        <div class="annotation-viewport" tabindex="0" role="region" aria-label="Six annotated states; scroll horizontally on narrow screens">
+          <a class="image-link annotation-canvas" href="assets/images/annotation-stages.png" target="_blank" rel="noopener" data-animation-full-size aria-label="View all six annotation stages at full resolution">
+            <img src="assets/images/annotation-stages.png" width="2930" height="624" loading="lazy" decoding="async" alt="Six annotated states for putting the apple into the container: Approach at 0.0 s, Approach at 2.5 s, Align at 3.8 s, Manipulate at 4.9 s, Release at 6.1 s, and Retract at 7.7 s. Each state shows the original progress, phase, gripper state and contact annotations.">
+          </a>
+        </div>
+        <figcaption class="figure-caption-row"><a class="full-size" href="assets/images/annotation-stages.png" target="_blank" rel="noopener" data-animation-full-size>View full-size ↗</a></figcaption>
+      </figure>
+      <article class="paper-figure transition-example" id="future-state-example" aria-labelledby="future-state-example-heading">
+        <header class="transition-example-heading">
+          <h3 id="future-state-example-heading">Future-State Difference Text</h3>
+          <p>Task: <strong>load the bowl</strong></p>
+        </header>
+        <div class="transition-pair" aria-label="Current and next observations for loading the bowl">
+          <figure class="transition-frame">
+            <a class="image-link" href="assets/images/bowl-current.png" target="_blank" rel="noopener" aria-label="Open the current bowl observation at full resolution">
+              <img src="assets/images/bowl-current.png" width="235" height="215" alt="Current observation: a robot gripper holds the rim of a pink bowl near the tabletop, with a wire rack to the right." loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>Current state</strong></figcaption>
+          </figure>
+          <span class="transition-arrow" aria-hidden="true">→</span>
+          <figure class="transition-frame">
+            <a class="image-link" href="assets/images/bowl-next.png?v=20261013-updated" target="_blank" rel="noopener" aria-label="Open the next bowl observation at full resolution">
+              <img src="assets/images/bowl-next.png?v=20261013-updated" width="235" height="215" alt="Next observation: the closed gripper holds the pink bowl higher above the tabletop, near the wire rack." loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>Next state</strong></figcaption>
+          </figure>
+        </div>
+        <div class="text-reveal" data-text-reveal>
+        <p class="transition-text" id="future-state-text"><strong>Task_temporal</strong> The overall task is "load the bowl". At the current time, the task is in the "Carry the bowl toward the loading area." phase, with the total task progress at 0.42. The next subgoal is "Align the bowl with the loading area." The next total task progress is 0.50. <strong>Spatial_motion</strong> The target object is the pink bowl. At the current time, the pink bowl is visible in the center horizontal and lower-middle vertical band, with normalized bounding box [0.388, 0.550, 0.505, 0.685]. The gripper is to the right and above of the pink bowl, with normalized bounding box [0.402, 0.415, 0.615, 0.633]. At the next time, the pink bowl is visible in the center horizontal and middle vertical band, with normalized bounding box [0.527, 0.463, 0.645, 0.602]. The gripper is to the right and above of the pink bowl, with normalized bounding box [0.519, 0.157, 0.822, 0.427]. <strong>Contact_interaction</strong> During the next action steps, the gripper remains closed; the gripper moves right 8 cm. The gripper maintain contact with the pink bowl in this phase. The gripper maintains a closed grasp on the bowl's rim, lifting it from the table surface and moving it laterally toward the wire rack structure. The task-relevant affordance is the bowl_rim_grasp_region [0.458, 0.615] [0.492, 0.615] of the pink bowl. The detected object-state change for the pink bowl is from resting on table surface to suspended in mid-air during this phase. <strong>Object_constraints</strong> The gripper must maintain a secure closed grip on the bowl rim to prevent dropping during the transport and alignment maneuver. The bowl must remain stable within the gripper's grasp and not tilt excessively while being moved toward the target area.</p>
+        </div>
+      </article>
+      <div class="data-heading"><div><h3 id="pipeline-heading">Automated Data Annotation Pipeline</h3><p>DROID, MolmoAct and RH20T demonstrations are standardized in LeRobot v3, annotated for current–future state pairs, and assessed through automated checks, model review and manual audits.</p></div><div class="dataset-scale" aria-label="Approximate curated pretraining scale"><div><strong>≈484</strong><span>hours of demonstrations</span></div><div><strong>≈24M</strong><span>frames</span></div></div></div>
+      <figure class="paper-figure pipeline-figure" data-pipeline-animation aria-labelledby="pipeline-heading">
+        <div class="pipeline-toolbar" hidden>
+          <span class="pipeline-status" data-pipeline-status>Complete pipeline</span>
+        </div>
+        <div class="pipeline-viewport" id="pipeline-canvas" tabindex="0" role="region" aria-label="Eight-step annotation pipeline; scroll horizontally on narrow screens">
+<!-- PIPELINE SVG START -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 138 1562 716" width="1562" height="716" class="pipeline-diagram" role="img" aria-labelledby="pipeline-svg-title" aria-describedby="pipeline-svg-desc"><title id="pipeline-svg-title">Automated Data Annotation Pipeline</title><desc id="pipeline-svg-desc">Eight steps: Data selection; Unified format; Data cleaning; Keyframes + semantics; Visual annotation; Sample construction; LLM review; Human review. LLM review feeds back to keyframes and semantics to revise prompts and rules. Human review audits 300 pairs, 100 each from DROID, MolmoAct and RH20T, across four text aspects and nine slot categories.</desc><g data-source-name="upper-flow-background"><rect x="36" y="142" width="1528" height="350" fill="#F0F6FC" stroke="none" stroke-width="0"/></g><g data-source-name="lower-flow-background"><rect x="36" y="556" width="1528" height="287" fill="#FFF9F5" stroke="none" stroke-width="0"/></g><g class="pipeline-route" data-pipeline-to="2"><g data-source-name="s2-flow"><polygon points="393,327 417,327 417,322 427,332 417,342 417,337 393,337" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="3"><g data-source-name="s3-flow"><polygon points="782,327 806,327 806,322 816,332 806,342 806,337 782,337" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="4"><g data-source-name="s4-flow"><polygon points="1171,327 1195,327 1195,322 1205,332 1195,342 1195,337 1171,337" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="5"><g data-source-name="s5-route-down"><path d="M 1391 489 L 1391 514" fill="none" stroke="#315F9F" stroke-width="2.6"/></g><g data-source-name="s5-route-return"><path d="M 1391 514 L 79 514" fill="none" stroke="#315F9F" stroke-width="2.6"/></g><g data-source-name="s5-route-enter"><path d="M 79 514 L 79 541" fill="none" stroke="#315F9F" stroke-width="2.6"/></g><g data-source-name="s5-route"><polygon points="74.5,536 83.5,536 83.5,547 88,547 79,556 70,547 74.5,547" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="6"><g data-source-name="s6-route"><polygon points="393,718 417,718 417,713 427,723 417,733 417,728 393,728" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="7"><g data-source-name="s7-route"><polygon points="782,718 806,718 806,713 816,723 806,733 806,728 782,728" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-route" data-pipeline-to="8"><g data-source-name="s8-route"><polygon points="1171,718 1195,718 1195,713 1205,723 1195,733 1195,728 1171,728" fill="#315F9F" stroke="none" stroke-width="0"/></g></g><g class="pipeline-stage" data-pipeline-step="1"><g data-source-name="s1-node"><ellipse cx="79" cy="176" rx="21" ry="21" fill="#B6C7EA" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s1-number"><text x="79" y="184.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">1</tspan></text></g><g data-source-name="s1-title"><text x="112" y="186.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Data selection</tspan></text></g><image x="62.389" y="230" width="142.222" height="80" href="assets/images/pipeline/image1.png" preserveAspectRatio="none"/><image x="74.167" y="316" width="118.667" height="89" href="assets/images/pipeline/image2.png" preserveAspectRatio="none"/><image x="62.389" y="408" width="142.222" height="80" href="assets/images/pipeline/image3.png" preserveAspectRatio="none"/><g data-source-name="s1-droid"><text x="223" y="270.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#252B33">DROID</tspan></text></g><g data-source-name="s1-molmo"><text x="223" y="367.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#252B33">MolmoAct</tspan></text></g><g data-source-name="s1-rh"><text x="223" y="458.9" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#252B33">RH20T</tspan></text></g><g data-source-name="s1-detail"><text x="58" y="224.85" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="21" font-weight="400" fill="#7185A4">Valid, diverse segments</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="2"><g data-source-name="s2-node"><ellipse cx="468" cy="176" rx="21" ry="21" fill="#B6C7EA" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s2-number"><text x="468" y="184.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">2</tspan></text></g><g data-source-name="s2-title"><text x="501" y="186.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Unified format</tspan></text></g><image x="546" y="232" width="118" height="118" href="assets/images/pipeline/image4.png" preserveAspectRatio="none"/><g data-source-name="s2-lerobot"><text x="606" y="396.85" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="31" font-weight="700" fill="#315F9F">LeRobot v3</tspan></text></g><g data-source-name="s2-store"><text x="610.5" y="436.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="400" fill="#252B33">Parquet + videos</tspan></text></g><g data-source-name="s2-align"><text x="610.5" y="471.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="22" font-weight="400" fill="#7185A4">Timestamp alignment</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="3"><g data-source-name="s3-node"><ellipse cx="857" cy="176" rx="21" ry="21" fill="#A8CC86" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s3-number"><text x="857" y="184.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">3</tspan></text></g><g data-source-name="s3-title"><text x="890" y="186.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Data cleaning</tspan></text></g><image x="922" y="238" width="120" height="120" href="assets/images/pipeline/image5.png" preserveAspectRatio="none"/><g data-source-name="s3-checks-1"><text x="1002.5" y="406.05" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="23" font-weight="400" fill="#252B33">Language    Timing    Vision</tspan></text></g><g data-source-name="s3-checks-2"><text x="1002.5" y="444.05" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="23" font-weight="400" fill="#252B33">State / action    Integrity</tspan></text></g><g data-source-name="s3-split"><text x="1002.5" y="478.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#7185A4">Split trajectories before windows</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="4"><g data-source-name="s4-node"><ellipse cx="1246" cy="176" rx="21" ry="21" fill="#A8CC86" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s4-number"><text x="1246" y="184.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">4</tspan></text></g><g data-source-name="s4-title"><text x="1279" y="186.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Keyframes + semantics</tspan></text></g><image x="1225" y="240.736" width="328" height="80.527" href="assets/images/pipeline/image6.png" preserveAspectRatio="none"/><g data-source-name="s4-keyframe-emphasis"><rect x="1317" y="244" width="70" height="69" fill="none" stroke="#F3C05E" stroke-width="3"/></g><image x="1235" y="350" width="47" height="47" href="assets/images/pipeline/image7.png" preserveAspectRatio="none"/><g data-source-name="s4-qwen"><text x="1295" y="380.6" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="26" font-weight="700" fill="#315F9F">Qwen3.8-27B</tspan></text></g><g data-source-name="s4-dense"><text x="1389" y="428.05" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="23" font-weight="400" fill="#252B33">Event-adaptive sampling</tspan></text></g><g data-source-name="s4-semantics"><text x="1389" y="466.65" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="19" font-weight="400" fill="#7185A4">Objects, phases, contact, constraints</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="5"><g data-source-name="s5-node"><ellipse cx="79" cy="583" rx="21" ry="21" fill="#F3C05E" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s5-number"><text x="79" y="591.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">5</tspan></text></g><g data-source-name="s5-title"><text x="112" y="593.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Visual annotation</tspan></text></g><image x="58" y="660.812" width="107" height="68.376" href="assets/images/pipeline/image8.png" preserveAspectRatio="none"/><image x="169" y="660.812" width="107" height="68.376" href="assets/images/pipeline/image9.png" preserveAspectRatio="none"/><image x="286" y="647.5" width="94" height="94" href="assets/images/pipeline/image10.png" preserveAspectRatio="none"/><g data-source-name="s5-sam"><text x="112" y="636.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="22" font-weight="700" fill="#252B33">SAM 3</tspan></text></g><g data-source-name="s5-depth"><text x="223" y="635.3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="18" font-weight="700" fill="#252B33">UniDepth V2</tspan></text></g><g data-source-name="s5-flow"><text x="337" y="635.3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="18" font-weight="700" fill="#252B33">MegaFlow</tspan></text></g><g data-source-name="s5-masklabel"><text x="109.5" y="769.15" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="19" font-weight="400" fill="#7185A4">Box + mask</tspan></text></g><g data-source-name="s5-depthlabel"><text x="225" y="768.8" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="18" font-weight="400" fill="#7185A4">Surface depth</tspan></text></g><g data-source-name="s5-flowlabel"><text x="337" y="769.85" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="21" font-weight="400" fill="#7185A4">2D flow</tspan></text></g><g data-source-name="s5-track"><text x="222" y="820.05" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="23" font-weight="400" fill="#315F9F">Shared object IDs and time</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="6"><g data-source-name="s6-node"><ellipse cx="468" cy="583" rx="21" ry="21" fill="#F6C6AD" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s6-number"><text x="468" y="591.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">6</tspan></text></g><g data-source-name="s6-title"><text x="501" y="593.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Sample construction</tspan></text></g><image x="461.2" y="632" width="106.6" height="82" href="assets/images/pipeline/image11.png" preserveAspectRatio="none"/><image x="648.833" y="632" width="109.333" height="82" href="assets/images/pipeline/image12.png" preserveAspectRatio="none"/><g data-source-name="s6-flow"><polygon points="593,670.75 618.5,670.75 618.5,667 626,674.5 618.5,682 618.5,678.25 593,678.25" fill="#315F9F" stroke="none" stroke-width="0"/></g><g data-source-name="s6-t"><text x="514.5" y="626.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="22" font-weight="400" fill="#7185A4">t</tspan></text></g><g data-source-name="s6-future"><text x="703.5" y="626.7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="22" font-weight="400" fill="#7185A4">t + Δ</tspan></text></g><g data-source-name="s6-horizon"><text x="609" y="736.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#7185A4">Prediction horizon</tspan></text></g><image x="458" y="761" width="37" height="37" href="assets/images/pipeline/image13.png" preserveAspectRatio="none"/><g data-source-name="s6-text"><text x="510" y="785.35" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="21" font-weight="400" fill="#252B33">Future-State Difference Text</tspan></text></g><g data-source-name="s6-braces"><text x="455" y="831.5" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="30" font-weight="700" fill="#315F9F">{ }</tspan></text></g><g data-source-name="s6-slots"><text x="510" y="829.85" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="21" font-weight="400" fill="#252B33">Structured Transition Slots</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="7"><g data-source-name="s7-node"><ellipse cx="857" cy="583" rx="21" ry="21" fill="#E0A8A8" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s7-number"><text x="857" y="591.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">7</tspan></text></g><g data-source-name="s7-title"><text x="890" y="593.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">LLM review</tspan></text></g><image x="848" y="641" width="91" height="91" href="assets/images/pipeline/image14.png" preserveAspectRatio="none"/><g data-source-name="s7-gpt"><text x="957" y="692.6" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="46" font-weight="700" fill="#315F9F">GPT</tspan></text></g><g data-source-name="s7-review"><text x="1003" y="771.9" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="400" fill="#252B33">Field-by-field review</tspan></text></g><g data-source-name="s7-outcomes"><text x="1002.5" y="821.2" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="22" font-weight="400" fill="#7185A4">Reannotate, mask, or discard</tspan></text></g></g><g class="pipeline-stage" data-pipeline-step="8"><g data-source-name="s8-node"><ellipse cx="1246" cy="583" rx="21" ry="21" fill="#B6C7EA" stroke="#315F9F" stroke-width="1"/></g><g data-source-name="s8-number"><text x="1246" y="591.4" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="24" font-weight="700" fill="#315F9F">8</tspan></text></g><g data-source-name="s8-title"><text x="1279" y="593.45" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="27" font-weight="700" fill="#315F9F">Human review</tspan></text></g><image x="1229" y="632" width="86" height="86" href="assets/images/pipeline/image15.png" preserveAspectRatio="none"/><g data-source-name="s8-total"><text x="1323" y="692.3" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="68" font-weight="700" fill="#315F9F">300</tspan></text></g><g data-source-name="s8-pairs"><text x="1461" y="690.1" text-anchor="start" font-family="Arial, Helvetica, sans-serif"><tspan font-size="26" font-weight="400" fill="#7185A4">pairs</tspan></text></g><g data-source-name="s8-audit-allocation"><rect x="1225" y="724" width="108.667" height="35" fill="#DCEAF8" stroke="#7185A4" stroke-width="0.667"/><text x="1279.333" y="748.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#315F9F">DROID</tspan></text><rect x="1333.667" y="724" width="108.667" height="35" fill="#DCEAF8" stroke="#7185A4" stroke-width="0.667"/><text x="1388" y="748.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#315F9F">MolmoAct</tspan></text><rect x="1442.333" y="724" width="108.667" height="35" fill="#DCEAF8" stroke="#7185A4" stroke-width="0.667"/><text x="1496.667" y="748.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#315F9F">RH20T</tspan></text><rect x="1225" y="759" width="108.667" height="35" fill="#FDE9DD" stroke="#7185A4" stroke-width="0.667"/><text x="1279.333" y="785.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="26" font-weight="700" fill="#252B33">100</tspan></text><rect x="1333.667" y="759" width="108.667" height="35" fill="#FDE9DD" stroke="#7185A4" stroke-width="0.667"/><text x="1388" y="785.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="26" font-weight="700" fill="#252B33">100</tspan></text><rect x="1442.333" y="759" width="108.667" height="35" fill="#FDE9DD" stroke="#7185A4" stroke-width="0.667"/><text x="1496.667" y="785.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="26" font-weight="700" fill="#252B33">100</tspan></text></g><g data-source-name="s8-aspects"><text x="1390" y="832.35" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="21" font-weight="400" fill="#252B33">4 text aspects + 9 slot categories</tspan></text></g></g><g class="pipeline-feedback"><g data-source-name="s7-feedback-start"><path d="M 1008 558 L 1008 550" fill="none" stroke="#8FAB70" stroke-width="2.2" stroke-dasharray="6 4"/></g><g data-source-name="s7-feedback-across"><path d="M 1008 550 L 1580 550" fill="none" stroke="#8FAB70" stroke-width="2.2" stroke-dasharray="6 4"/></g><g data-source-name="s7-feedback-up"><path d="M 1580 550 L 1580 375" fill="none" stroke="#8FAB70" stroke-width="2.2" stroke-dasharray="6 4"/></g><g data-source-name="s7-feedback-end"><path d="M 1580 375 L 1557 375" fill="none" stroke="#8FAB70" stroke-width="2.2" stroke-dasharray="6 4"/></g><g data-source-name="s7-feedback-arrow"><polygon points="1564,372 1556,372 1556,369 1550,375 1556,381 1556,378 1564,378" fill="#8FAB70" stroke="none" stroke-width="0"/></g><g data-source-name="s7-feedback-label"><text x="1388" y="542" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"><tspan font-size="20" font-weight="400" fill="#8FAB70">Revise prompts and rules</tspan></text></g></g></svg>
+<!-- PIPELINE SVG END -->
+        </div>
+        <figcaption class="figure-caption-row"><span>Eight annotation steps, with review feedback to revise prompts and rules.</span><a class="full-size" href="assets/images/annotation-pipeline.svg" target="_blank" rel="noopener">View full-size ↗</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="section container" id="results" aria-labelledby="results-heading">
+      <div class="section-heading"><p class="eyebrow">03 · Experiments</p><h2 id="results-heading">Simulation and Real-Robot Evaluation</h2></div>
+      <div class="metrics" aria-label="Reported average task success rates">
+        <div class="metric"><strong>98.4%</strong><span class="label">LIBERO</span><small>40 tasks · 2,000 episodes</small></div>
+        <div class="metric"><strong>90.06%</strong><span class="label">RoboTwin · Clean</span><small>50 tasks · 100 episodes/task</small></div>
+        <div class="metric"><strong>89.74%</strong><span class="label">RoboTwin · Random</span><small>50 tasks · 100 episodes/task</small></div>
+        <div class="metric"><strong>68.0%</strong><span class="label">Real robot</span><small>5 tasks · 200 trials</small></div>
+      </div>
+      <div class="result-block">
+        <h3>LIBERO: Spatial, Object, Goal and Long</h3>
+        <p class="result-intro">The four suites assess spatial understanding, object manipulation, goal-conditioned task completion and long-horizon execution. VLA-Δ achieves an average success rate of 98.4%, the highest among all compared methods.</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="LIBERO result table; scroll horizontally on narrow screens">
+          <table class="libero-table" id="libero-table"><caption>Performance comparison on LIBERO · Success Rates (%) · selected methods from Table 1</caption>
+            <thead><tr><th scope="col">Methods</th><th scope="col">VLM Size</th><th scope="col">Spatial</th><th scope="col">Object</th><th scope="col">Goal</th><th scope="col">Long</th><th scope="col">Average</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">π<sub>0.5</sub></th><td>3B</td><td>98.8</td><td>98.2</td><td>98.0</td><td>92.4</td><td>96.9</td></tr>
+              <tr><th scope="row">GR00T-N1.7</th><td>2B</td><td>97.7</td><td>97.5</td><td>98.5</td><td>94.4</td><td>97.0</td></tr>
+              <tr><th scope="row">openVLA-OFT</th><td>7B</td><td>97.6</td><td>98.4</td><td>97.9</td><td>94.6</td><td>97.1</td></tr>
+              <tr><th scope="row">VLA-Adapter</th><td>0.5B</td><td>97.8</td><td>99.2</td><td>97.2</td><td>95.0</td><td>97.3</td></tr>
+              <tr><th scope="row">ZR-0</th><td>2B</td><td>97.4</td><td>99.4</td><td>97.8</td><td>96.4</td><td>97.8</td></tr>
+              <tr class="ours"><th scope="row">VLA-Δ</th><td>2B</td><td>98.8</td><td>99.8</td><td>98.6</td><td>96.4</td><td>98.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="result-block">
+        <h3>RoboTwin 2.0: Clean and Random</h3>
+        <p class="result-intro">Clean uses relatively fixed scene appearances and object layouts. Random varies object instances, initial positions, lighting, backgrounds, tabletop layouts and instruction phrasing.</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="RoboTwin average success rates">
+          <table id="robotwin-table"><caption>Performance comparison on RoboTwin 2.0 · average success rates (%) · all methods from Table 2</caption><thead><tr><th scope="col">Method</th><th scope="col">Clean</th><th scope="col">Random</th></tr></thead><tbody>
+            <tr><th scope="row">X-VLA</th><td>72.88</td><td>72.84</td></tr>
+            <tr><th scope="row">π<sub>0</sub></th><td>65.92</td><td>58.4</td></tr>
+            <tr><th scope="row">π<sub>0.5</sub></th><td>82.74</td><td>76.76</td></tr>
+            <tr><th scope="row">Motus</th><td>88.52</td><td>87.02</td></tr>
+            <tr><th scope="row">ZR-0</th><td>88.70</td><td>87.98</td></tr>
+            <tr class="ours"><th scope="row">VLA-Δ</th><td>90.06</td><td>89.74</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="robustness-layout">
+        <div class="robustness-copy"><h3>LIBERO-Plus: generalization under environmental changes</h3><p class="callout"><strong>89.0%</strong> under the Language perturbation, outperforming π<sub>0.5</sub> at <strong>82.6%</strong> by <strong>6.4 percentage points</strong>.</p><p>Across the remaining perturbation settings, VLA-Δ remains competitive with leading methods.</p><p class="table-note">50 episodes/task/perturbation · 8,000 episodes total.</p></div>
+        <figure class="paper-figure" data-figure="robustness"><a class="image-link" href="assets/images/robustness.png" target="_blank" rel="noopener" data-full-size aria-label="Open the original LIBERO-Plus result chart"><picture><source srcset="assets/images/robustness-1200.webp 1200w, assets/images/robustness.webp 1701w" sizes="(max-width: 900px) calc(100vw - 70px), 580px" type="image/webp"><img src="assets/images/robustness.png" width="1701" height="646" alt="Original LIBERO-Plus chart. VLA-Delta success rates are 89.0% for Language, 95.1% for Light, 94.8% for Background and 83.2% for Layout, with baseline comparisons." loading="lazy" decoding="async"></picture></a><figcaption class="figure-caption-row"><span>Original paper Figure 4 · success rate (%).</span><a class="full-size" href="assets/images/robustness.png" target="_blank" rel="noopener" data-full-size>View full-size ↗</a></figcaption></figure>
+      </div>
+      <details id="ablation"><summary>Ablation Experiments on LIBERO</summary><div class="details-body"><p>The complete VLA-Δ model combines all three supervision types, achieving an average success rate of 98.40%. Future-State Difference Text, Structured Transition Slots and Dense Optical Flow each improve over Difference Queries Only with action-only pretraining (96.45%). All variants use only the action-learning objective during downstream fine-tuning.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Complete LIBERO ablation table; scroll horizontally"><table class="ablation-table" id="ablation-table"><caption>Ablation results on 40 LIBERO tasks · complete Table 3</caption><thead><tr><th scope="col">Variant</th><th scope="col">Query</th><th scope="col">Pretraining</th><th scope="col">Difference Text</th><th scope="col">Slots</th><th scope="col">Optical Flow</th><th scope="col">LIBERO Avg. (%)</th></tr></thead><tbody>
+        <tr><th scope="row">Dense VLM Features</th><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td>95.70</td></tr>
+        <tr><th scope="row">Dense VLM Features</th><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td>95.85</td></tr>
+        <tr><th scope="row">Difference Queries Only</th><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td>96.25</td></tr>
+        <tr><th scope="row">Difference Queries Only</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td>96.45</td></tr>
+        <tr><th scope="row">Query + Difference Text</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td>97.20</td></tr>
+        <tr><th scope="row">Query + Structured Slots</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td>96.90</td></tr>
+        <tr><th scope="row">Query + Optical Flow</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td>97.35</td></tr>
+        <tr class="ours"><th scope="row">VLA-Δ (Full)</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>98.40</td></tr>
+      </tbody></table></div></div></details>
+    </section>
+
+    <section class="section container" id="real-robot" aria-labelledby="real-heading">
+      <div class="section-heading"><p class="eyebrow">04 · Experiments</p><h2 id="real-heading">Real-Robot Evaluation</h2><p class="section-lead">Five manipulation tasks evaluate obstacle avoidance, long-horizon execution, fine-grained manipulation, spatial reasoning and generalization under environmental changes.</p></div>
+      <figure class="paper-figure real-results">
+        <div class="real-chart-scroll" tabindex="0" role="region" aria-label="Real-robot success rates; scroll horizontally on narrow screens. Focus a bar to read its value.">
+<!-- REAL ROBOT CHART START -->
+<svg class="real-robot-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1928 607" width="1928" height="607" role="group" aria-labelledby="robot-chart-title robot-chart-description">
+  <title id="robot-chart-title">Experimental Results — real-robot success rates</title>
+  <desc id="robot-chart-description">Success Rate (%), from 0 to 100. Four methods across five tasks and their average. Hover, focus or tap a bar to show its value. Each task has 40 evaluation episodes.</desc>
+  <style>
+    .real-robot-chart { display: block; width: 100%; height: auto; font-family: "Times New Roman", Times, serif; color: #222; }
+    .real-robot-chart text { fill: #222; }
+    .real-robot-chart .chart-bar { outline: none; cursor: pointer; }
+    .real-robot-chart .bar-mark { transform-origin: 0 0; transition: transform 180ms ease; }
+    .real-robot-chart .bar-value { opacity: 0; transform: translateY(6px); transition: opacity 160ms ease, transform 180ms ease; pointer-events: none; paint-order: stroke fill; stroke: #fefefe; stroke-width: 5px; stroke-linejoin: round; }
+    .real-robot-chart .chart-bar.is-active .bar-mark,
+    .real-robot-chart:not([data-enhanced]) .chart-bar:hover .bar-mark,
+    .real-robot-chart:not([data-enhanced]) .chart-bar:focus .bar-mark { transform: scale(1.06, 1.025); }
+    .real-robot-chart .chart-bar.is-active .bar-value,
+    .real-robot-chart:not([data-enhanced]) .chart-bar:hover .bar-value,
+    .real-robot-chart:not([data-enhanced]) .chart-bar:focus .bar-value { opacity: 1; transform: translateY(0); }
+    .real-robot-chart .chart-bar:focus-visible .bar-mark rect { stroke: #1c3d60; stroke-width: 3px; }
+    @media (prefers-reduced-motion: reduce) { .real-robot-chart .bar-mark, .real-robot-chart .bar-value { transition: none; } }
+  </style>
+  <defs>
+    <pattern id="robot-blue-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#418cdd"/>
+      <circle cx="3" cy="3" r="1.15" fill="#e4effb"/>
+      <circle cx="9" cy="9" r="1.15" fill="#e4effb"/>
+    </pattern>
+    <filter id="robot-chart-shadow" x="-20%" y="-30%" width="140%" height="190%">
+      <feDropShadow dx="0" dy="5" stdDeviation="2.5" flood-color="#000" flood-opacity=".25"/>
+    </filter>
+    <marker id="robot-axis-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="8" y="42" width="1914" height="558" rx="46" fill="#fefefe" stroke="#d0dce8" stroke-width="5"/>
+  <rect x="57" y="0" width="554" height="66" fill="#fff"/>
+  <text x="58" y="51" font-size="56" font-weight="700" style="fill:#397dc5">(b)</text>
+  <text x="136" y="51" font-size="50" font-weight="700" style="fill:#1c3d60">Experimental Results</text>
+  <g aria-hidden="true"><rect x="650" y="70" width="53" height="26" fill="#c3d59b" filter="url(#robot-chart-shadow)"/><text x="721" y="94" font-size="30">π0</text></g>
+  <g aria-hidden="true"><rect x="815" y="70" width="53" height="26" fill="#f3b6be" filter="url(#robot-chart-shadow)"/><text x="886" y="94" font-size="30">π0.5</text></g>
+  <g aria-hidden="true"><rect x="1003" y="70" width="53" height="26" fill="#f48418" filter="url(#robot-chart-shadow)"/><text x="1074" y="94" font-size="30">ZR0</text></g>
+  <g aria-hidden="true"><rect x="1156" y="70" width="53" height="26" fill="url(#robot-blue-dots)" filter="url(#robot-chart-shadow)"/><text x="1227" y="94" font-size="30">VLA-Δ</text></g>
+  <text x="81" y="517" text-anchor="end" font-size="22">0</text>
+  <line x1="102" y1="409" x2="1906" y2="409" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="81" y="417" text-anchor="end" font-size="22">25</text>
+  <line x1="102" y1="309" x2="1906" y2="309" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="81" y="317" text-anchor="end" font-size="22">50</text>
+  <line x1="102" y1="209" x2="1906" y2="209" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="81" y="217" text-anchor="end" font-size="22">75</text>
+  <line x1="102" y1="109" x2="1906" y2="109" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="81" y="117" text-anchor="end" font-size="22">100</text>
+  <text transform="translate(45 305) rotate(-90)" text-anchor="middle" font-size="30">Success Rate (%)</text>
+  <g class="chart-bars">
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Obstacle Avoidance — π0: 7.5%" data-task="Obstacle Avoidance" data-method="π0" data-value="7.5" transform="translate(195.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-30" width="53" height="30" fill="#c3d59b"/></g>
+      <text class="bar-value" x="0" y="-42.75" text-anchor="middle" font-size="22" aria-hidden="true">7.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Obstacle Avoidance — π0.5: 30%" data-task="Obstacle Avoidance" data-method="π0.5" data-value="30" transform="translate(249 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-120" width="53" height="120" fill="#f3b6be"/></g>
+      <text class="bar-value" x="0" y="-135" text-anchor="middle" font-size="22" aria-hidden="true">30%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Obstacle Avoidance — ZR0: 32.5%" data-task="Obstacle Avoidance" data-method="ZR0" data-value="32.5" transform="translate(302.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-130" width="53" height="130" fill="#f48418"/></g>
+      <text class="bar-value" x="0" y="-145.25" text-anchor="middle" font-size="22" aria-hidden="true">32.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Obstacle Avoidance — VLA-Δ: 42.5%" data-task="Obstacle Avoidance" data-method="VLA-Δ" data-value="42.5" transform="translate(356 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-170" width="53" height="170" fill="url(#robot-blue-dots)"/></g>
+      <text class="bar-value" x="0" y="-186.25" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">42.5%</text>
+    </g>
+    <text x="275" y="537" text-anchor="middle" font-size="30">Obstacle</text>
+    <text x="275" y="573" text-anchor="middle" font-size="30">Avoidance</text>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Long-Horizon Execution — π0: 12.5%" data-task="Long-Horizon Execution" data-method="π0" data-value="12.5" transform="translate(487.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-50" width="53" height="50" fill="#c3d59b"/></g>
+      <text class="bar-value" x="0" y="-63.25" text-anchor="middle" font-size="22" aria-hidden="true">12.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Long-Horizon Execution — π0.5: 65%" data-task="Long-Horizon Execution" data-method="π0.5" data-value="65" transform="translate(541 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-260" width="53" height="260" fill="#f3b6be"/></g>
+      <text class="bar-value" x="0" y="-278.5" text-anchor="middle" font-size="22" aria-hidden="true">65%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Long-Horizon Execution — ZR0: 70%" data-task="Long-Horizon Execution" data-method="ZR0" data-value="70" transform="translate(594.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-280" width="53" height="280" fill="#f48418"/></g>
+      <text class="bar-value" x="0" y="-299" text-anchor="middle" font-size="22" aria-hidden="true">70%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Long-Horizon Execution — VLA-Δ: 67.5%" data-task="Long-Horizon Execution" data-method="VLA-Δ" data-value="67.5" transform="translate(648 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-270" width="53" height="270" fill="url(#robot-blue-dots)"/></g>
+      <text class="bar-value" x="0" y="-288.75" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">67.5%</text>
+    </g>
+    <text x="567" y="537" text-anchor="middle" font-size="30">Long-Horizon</text>
+    <text x="567" y="573" text-anchor="middle" font-size="30">Execution</text>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Fine-Grained Manipulation — π0: 47.5%" data-task="Fine-Grained Manipulation" data-method="π0" data-value="47.5" transform="translate(779.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-190" width="53" height="190" fill="#c3d59b"/></g>
+      <text class="bar-value" x="0" y="-206.75" text-anchor="middle" font-size="22" aria-hidden="true">47.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Fine-Grained Manipulation — π0.5: 65%" data-task="Fine-Grained Manipulation" data-method="π0.5" data-value="65" transform="translate(833 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-260" width="53" height="260" fill="#f3b6be"/></g>
+      <text class="bar-value" x="0" y="-278.5" text-anchor="middle" font-size="22" aria-hidden="true">65%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Fine-Grained Manipulation — ZR0: 67.5%" data-task="Fine-Grained Manipulation" data-method="ZR0" data-value="67.5" transform="translate(886.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-270" width="53" height="270" fill="#f48418"/></g>
+      <text class="bar-value" x="0" y="-288.75" text-anchor="middle" font-size="22" aria-hidden="true">67.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Fine-Grained Manipulation — VLA-Δ: 72.5%" data-task="Fine-Grained Manipulation" data-method="VLA-Δ" data-value="72.5" transform="translate(940 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-290" width="53" height="290" fill="url(#robot-blue-dots)"/></g>
+      <text class="bar-value" x="0" y="-309.25" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">72.5%</text>
+    </g>
+    <text x="859" y="537" text-anchor="middle" font-size="30">Fine-Grained</text>
+    <text x="859" y="573" text-anchor="middle" font-size="30">Manipulation</text>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Spatial Reasoning — π0: 35%" data-task="Spatial Reasoning" data-method="π0" data-value="35" transform="translate(1071.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-140" width="53" height="140" fill="#c3d59b"/></g>
+      <text class="bar-value" x="0" y="-155.5" text-anchor="middle" font-size="22" aria-hidden="true">35%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Spatial Reasoning — π0.5: 80%" data-task="Spatial Reasoning" data-method="π0.5" data-value="80" transform="translate(1125 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-320" width="53" height="320" fill="#f3b6be"/></g>
+      <text class="bar-value" x="0" y="-340" text-anchor="middle" font-size="22" aria-hidden="true">80%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Spatial Reasoning — ZR0: 82.5%" data-task="Spatial Reasoning" data-method="ZR0" data-value="82.5" transform="translate(1178.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-330" width="53" height="330" fill="#f48418"/></g>
+      <text class="bar-value" x="0" y="-350.25" text-anchor="middle" font-size="22" aria-hidden="true">82.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Spatial Reasoning — VLA-Δ: 87.5%" data-task="Spatial Reasoning" data-method="VLA-Δ" data-value="87.5" transform="translate(1232 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-350" width="53" height="350" fill="url(#robot-blue-dots)"/></g>
+      <text class="bar-value" x="0" y="-370.75" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">87.5%</text>
+    </g>
+    <text x="1151" y="537" text-anchor="middle" font-size="30">Spatial</text>
+    <text x="1151" y="573" text-anchor="middle" font-size="30">Reasoning</text>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Generalization — π0: 45%" data-task="Generalization" data-method="π0" data-value="45" transform="translate(1363.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-180" width="53" height="180" fill="#c3d59b"/></g>
+      <text class="bar-value" x="0" y="-196.5" text-anchor="middle" font-size="22" aria-hidden="true">45%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Generalization — π0.5: 72.5%" data-task="Generalization" data-method="π0.5" data-value="72.5" transform="translate(1417 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-290" width="53" height="290" fill="#f3b6be"/></g>
+      <text class="bar-value" x="0" y="-309.25" text-anchor="middle" font-size="22" aria-hidden="true">72.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Generalization — ZR0: 70%" data-task="Generalization" data-method="ZR0" data-value="70" transform="translate(1470.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-280" width="53" height="280" fill="#f48418"/></g>
+      <text class="bar-value" x="0" y="-299" text-anchor="middle" font-size="22" aria-hidden="true">70%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="Generalization — VLA-Δ: 70%" data-task="Generalization" data-method="VLA-Δ" data-value="70" transform="translate(1524 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-280" width="53" height="280" fill="url(#robot-blue-dots)"/></g>
+      <text class="bar-value" x="0" y="-299" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">70%</text>
+    </g>
+    <text x="1443" y="537" text-anchor="middle" font-size="30">Generalization</text>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="AVG — π0: 29.5%" data-task="AVG" data-method="π0" data-value="29.5" transform="translate(1655.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-118" width="53" height="118" fill="#c3d59b" stroke="#222" stroke-width="2"/></g>
+      <text class="bar-value" x="0" y="-132.95" text-anchor="middle" font-size="22" aria-hidden="true">29.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="AVG — π0.5: 62.5%" data-task="AVG" data-method="π0.5" data-value="62.5" transform="translate(1709 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-250" width="53" height="250" fill="#f3b6be" stroke="#222" stroke-width="2"/></g>
+      <text class="bar-value" x="0" y="-268.25" text-anchor="middle" font-size="22" aria-hidden="true">62.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="AVG — ZR0: 64.5%" data-task="AVG" data-method="ZR0" data-value="64.5" transform="translate(1762.5 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-258" width="53" height="258" fill="#f48418" stroke="#222" stroke-width="2"/></g>
+      <text class="bar-value" x="0" y="-276.45" text-anchor="middle" font-size="22" aria-hidden="true">64.5%</text>
+    </g>
+    <g class="chart-bar" tabindex="0" role="img" aria-label="AVG — VLA-Δ: 68%" data-task="AVG" data-method="VLA-Δ" data-value="68" transform="translate(1816 509)">
+      <g class="bar-mark"><rect x="-26.5" y="-272" width="53" height="272" fill="url(#robot-blue-dots)" stroke="#222" stroke-width="2"/></g>
+      <text class="bar-value" x="0" y="-290.8" text-anchor="middle" font-size="22" font-weight="700" aria-hidden="true">68%</text>
+    </g>
+    <text x="1735" y="537" text-anchor="middle" font-size="30">AVG</text>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="2.5" filter="url(#robot-chart-shadow)" aria-hidden="true">
+    <path d="M102 509 V82" marker-end="url(#robot-axis-arrow)"/>
+    <path d="M102 509 H1903" marker-end="url(#robot-axis-arrow)"/>
+  </g>
+</svg>
+<!-- REAL ROBOT CHART END -->
+        </div>
+        <figcaption class="figure-caption-row"><span>Paper Figure 5(b) · success rate (%) · 40 episodes per task.</span><a class="full-size" href="assets/charts/real-robot-results.svg" target="_blank" rel="noopener">View full-size ↗</a></figcaption>
+      </figure>
+      <div class="real-demos" id="demos" aria-labelledby="demos-heading">
+        <div class="demos-toolbar">
+          <h3 id="demos-heading">Real-robot demonstrations</h3>
+        </div>
+        <p class="video-scroll-hint" id="video-scroll-hint">Videos loop automatically. Hover to enlarge and pause scrolling; swipe to browse.</p>
+        <div class="video-grid" id="robot-video-track" data-robot-videos role="region" tabindex="0" aria-label="Real-robot demonstration videos" aria-describedby="video-scroll-hint">
+          <figure class="video-card">
+            <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/real-robot/1-poster.jpg" src="assets/videos/real-robot/1.mp4?v=20261013-no-audio" aria-label="Obstacle Avoidance and Physical Constraint Compliance"><a href="assets/videos/real-robot/1.mp4?v=20261013-no-audio">Open MP4 video</a></video>
+            <figcaption><strong>Obstacle Avoidance and Physical Constraint Compliance</strong><p>Place the carrots on a rack, making sure they do not touch the cups.</p></figcaption>
+          </figure>
+          <figure class="video-card">
+            <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/real-robot/2-poster.jpg" src="assets/videos/real-robot/2.mp4?v=20261013-no-audio" aria-label="Long-Horizon Execution"><a href="assets/videos/real-robot/2.mp4?v=20261013-no-audio">Open MP4 video</a></video>
+            <figcaption><strong>Long-Horizon Execution</strong><p>Put all the items on the tabletop onto the tray.</p></figcaption>
+          </figure>
+          <figure class="video-card">
+            <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/real-robot/3-poster.jpg" src="assets/videos/real-robot/3.mp4?v=20261013-no-audio" aria-label="Fine-Grained Manipulation"><a href="assets/videos/real-robot/3.mp4?v=20261013-no-audio">Open MP4 video</a></video>
+            <figcaption><strong>Fine-Grained Manipulation</strong><p>Put the spoon into the cup.</p></figcaption>
+          </figure>
+          <figure class="video-card">
+            <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/real-robot/4-poster.jpg" src="assets/videos/real-robot/4.mp4?v=20261013-no-audio" aria-label="Spatial Reasoning"><a href="assets/videos/real-robot/4.mp4?v=20261013-no-audio">Open MP4 video</a></video>
+            <figcaption><strong>Spatial Reasoning</strong><p>Place the item closest to the bowl onto the plate.</p></figcaption>
+          </figure>
+          <figure class="video-card">
+            <video controls muted loop playsinline preload="none" width="1280" height="720" poster="assets/videos/real-robot/5-poster.jpg" src="assets/videos/real-robot/5.mp4?v=20261013-no-audio" aria-label="Generalization under Changed Tablecloth"><a href="assets/videos/real-robot/5.mp4?v=20261013-no-audio">Open MP4 video</a></video>
+            <figcaption><strong>Generalization under Changed Tablecloth</strong><p>Place the item closest to the bowl onto the plate with a changed tablecloth.</p></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="citation" aria-labelledby="citation-heading">
+      <div class="section-heading"><p class="eyebrow">05 · Citation</p><h2 id="citation-heading">Cite this work</h2><p class="section-lead" data-citation-note>Title and authors are confirmed. Year, publication venue and public identifier will be added when available.</p></div>
+      <div class="citation-box"><div class="citation-toolbar"><span data-citation-status>Provisional citation · publication metadata pending</span><button class="copy-button" type="button" data-copy-bibtex hidden aria-describedby="copy-status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></svg><span>Copy BibTeX</span></button></div><pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{vla_delta,
+  title = {VLA-{$\Delta$}: Learning Physical State Transition for Vision-Language-Action Models},
+  author = {Lu, Qi and Li, Jiarun and Zhang, Ce and Pan, Miao and Pan, Yi and Wang, Xu and Zhang, Wenqi and Zhang, Xuhong},
+  note = {Manuscript}
+}</code></pre></div>
+      <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      <noscript><p class="table-note">JavaScript is disabled. Select the BibTeX text above and copy it manually.</p></noscript>
+    </section>
+  </main>
+  <footer class="footer"><div class="footer-inner container"><span class="footer-brand">VLA-Δ</span><span>Physical state transitions for continuous action generation.</span><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>
