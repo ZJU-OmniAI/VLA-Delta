@@ -27,6 +27,7 @@ window.VLA_DELTA_SITE = {
   ],
   resources: {
     github: "https://github.com/ZJU-OmniAI/VLA-Delta",
+    huggingface: "https://huggingface.co/t0rn0d0",
     paper: "assets/paper/vla-delta.pdf",
     code: null, // Replace with the actual repository URL when available.
     arxiv: null // Replace with the actual arXiv abstract URL when available.

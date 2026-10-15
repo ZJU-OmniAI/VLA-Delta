@@ -63,7 +63,7 @@
     const key = original.dataset.resource;
     const href = config.resources[key];
     const ready = available(href);
-    const labels = { github: "GitHub", paper: "Paper", code: "Code", arxiv: "arXiv" };
+    const labels = { github: "GitHub", huggingface: "Hugging Face", paper: "Paper", code: "Code", arxiv: "arXiv" };
     const node = make(ready ? "a" : "span", undefined,
       `resource${key === "github" && ready ? " primary" : ""}${ready ? "" : " unavailable"}`);
     node.dataset.resource = key;
