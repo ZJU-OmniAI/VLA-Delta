@@ -14,11 +14,11 @@
   <a id="resource-links"></a>
 </div>
 
-<p align="center">
-  <a href="https://zju-omniai.github.io/VLA-Delta/Video/introduction.mp4">
-    <img src="https://zju-omniai.github.io/VLA-Delta/Video/introduction.png" width="90%" alt="VLA-Δ project introduction">
-  </a>
-</p>
+## 🎬 Introduction Video
+
+https://github.com/user-attachments/assets/764a646e-3b67-4933-b7dc-e46640f3909e
+
+[Open video directly](https://zju-omniai.github.io/VLA-Delta/Video/introduction.mp4)
 
 ## 🧭 Overview
 
