@@ -68,6 +68,8 @@ def main():
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--continue-on-error", action="store_true",
+                        help="Continue other groups after a task error; the run remains incomplete and exits nonzero")
     from utils.runtime_config import config_arguments
     args = parser.parse_args(config_arguments(parser, sys.argv[1:]))
     if args.execute and args.dry_run:
@@ -83,23 +85,31 @@ def main():
     (output / "experiment.md").write_text("# VLA-∆ evaluation\n\nStarted: " + datetime.now(timezone.utc).isoformat()
         + "\n\n```json\n" + json.dumps(vars(args), indent=2) + "\n```\n\n"
         "Actual checkpoint and preprocessing are read from the model server and saved per group in evaluation.json.\n")
-    status = dict(status="running", completed_groups=0, expected_groups=len(plan), successes=0, completed=0)
-    failure = None
+    status = dict(status="running", completed_groups=0, expected_groups=len(plan),
+                  successes=0, completed=0, failed_groups=[])
     try:
         for name, command, cwd, config in plan:
             if config:
                 (output / "configs" / f"{name}.json").write_text(json.dumps(config, indent=2))
             with (output / f"{name}.log").open("x") as stream:
-                subprocess.run(command, cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, check=True)
-            result = json.loads((output / name / "summary.json").read_text())
-            if not result["complete"]:
-                raise RuntimeError(f"incomplete evaluation group: {name}")
+                try:
+                    subprocess.run(command, cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, check=True)
+                    result = json.loads((output / name / "summary.json").read_text())
+                    if not result["complete"]:
+                        raise RuntimeError(f"incomplete evaluation group: {name}")
+                except Exception as error:
+                    status["failed_groups"].append(dict(group=name, error=type(error).__name__,
+                                                        returncode=getattr(error, "returncode", None)))
+                    if not args.continue_on_error:
+                        raise
+                    print(f"{name} failed ({type(error).__name__}); continuing other groups. See {output / (name + '.log')}",
+                          file=sys.stderr, flush=True)
+                    continue
             status["completed_groups"] += 1
             status["successes"] += result["successes"]
             status["completed"] += result["completed"]
-        status["status"] = "complete"
+        status["status"] = "incomplete" if status["failed_groups"] else "complete"
     except BaseException as error:
-        failure = error
         status.update(status="incomplete", failed_group=name, error=type(error).__name__)
         raise
     finally:
@@ -108,6 +118,8 @@ def main():
         (output / "summary.json").write_text(json.dumps(status, indent=2) + "\n")
         with (output / "experiment.md").open("a") as stream:
             stream.write("\n## Result\n\n```json\n" + json.dumps(status, indent=2) + "\n```\n")
+    if status["failed_groups"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

@@ -77,6 +77,8 @@ a.resource:hover { background: var(--soft); border-color: #b4c7e0; }
 a.resource.primary:hover { background: #244b81; border-color: #244b81; color: #fff; }
 .resource.unavailable { color: #637180; background: #f8fafc; cursor: default; }
 .resource svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.resource svg.huggingface-icon { width: 20px; height: 20px; flex-shrink: 0; stroke: none; }
+.resource svg.arxiv-icon { width: 20px; height: 20px; flex-shrink: 0; fill: #B31B1B; stroke: none; }
 .teaser { padding-bottom: 44px; }
 .hero-video { overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: #f7f9fc; box-shadow: var(--panel-shadow); }
 .video-placeholder { display: flex; aspect-ratio: 16 / 9; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; color: var(--muted); text-align: center; }

@@ -75,3 +75,6 @@ This command starts task evaluation directly, without additional rendering check
 | `--seed` | `0` | Client seed parameter; the initial candidate seed is `100000 × (1 + seed)` |
 | `--host` / `--port` | `127.0.0.1` / `8000` | Must match the model server |
 | `--output-dir` | `outputs/eval/robotwin` | Directory for evaluation results |
+| `--continue-on-error` | Disabled | Continue other task/profile groups after an error; any failed group keeps the run incomplete and the final exit code nonzero |
+
+The installer applies reproducible expert-planning guards for unreachable grasps, empty grasp candidate lists, and cup variants without the contact index requested by `place_container_plate`. These scenes are rejected through the existing expert feasibility filter. Missing files or malformed asset metadata still raise errors. To update an existing simulator checkout, run `python scripts/robotwin/patch_tasks.py --apply`; original source backups are retained.

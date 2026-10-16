@@ -75,6 +75,34 @@ def patch_grasp_actor(path, *, apply=False):
     return True
 
 
+def patch_container_plate(path, *, apply=False):
+    path = Path(path)
+    original = path.read_text(encoding="utf-8")
+    expression = 'contact_point_id=[0, 2][int(arm_tag == "left")]'
+    if expression not in original:
+        print(f"{path}: no fixed unguarded container contact index")
+        return False
+    anchor = "        # Grasp the container using selected arm with specific contact point\n"
+    if original.count(expression) != 1 or original.count(anchor) != 1:
+        raise ValueError(f"{path}: unexpected container task source; inspect before patching")
+    guard = (
+        '        contact_id = [0, 2][int(arm_tag == "left")]\n'
+        '        if contact_id >= len(self.container.config["contact_points_pose"]):\n'
+        '            # Some cup variants lack the left-arm expert contact candidate.\n'
+        '            self.plan_success = False\n'
+        '            return self.info\n\n'
+    )
+    updated = original.replace(anchor, guard + anchor).replace(expression, "contact_point_id=contact_id")
+    print(f"{path}: container contact-index guard required")
+    if apply:
+        backup = path.with_suffix(path.suffix + ".vla-delta-original")
+        if backup.exists():
+            raise FileExistsError(f"original backup already exists: {backup}")
+        shutil.copy2(path, backup)
+        path.write_text(updated, encoding="utf-8")
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--robotwin-root", type=Path,
@@ -83,6 +111,7 @@ def main():
     args = parser.parse_args()
     patch_click_alarmclock(args.robotwin_root / "envs/click_alarmclock.py", apply=args.apply)
     patch_grasp_actor(args.robotwin_root / "envs/_base_task.py", apply=args.apply)
+    patch_container_plate(args.robotwin_root / "envs/place_container_plate.py", apply=args.apply)
 
 
 if __name__ == "__main__":

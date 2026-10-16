@@ -4,7 +4,7 @@
  */
 window.VLA_DELTA_SITE = {
   title: "VLA-Δ: Learning Physical State Transition for Vision-Language-Action Models",
-  tagline: "Learning how the world should change helps robots learn how to act.",
+  tagline: "Don't just imitate actions. Understand change.",
   logo: {
     src: "assets/images/vla-delta-logo-transparent.png",
     width: 1254,
@@ -29,16 +29,23 @@ window.VLA_DELTA_SITE = {
     github: "https://github.com/ZJU-OmniAI/VLA-Delta",
     huggingface: "https://huggingface.co/t0rn0d0",
     paper: "assets/paper/vla-delta.pdf",
-    code: null, // Replace with the actual repository URL when available.
-    arxiv: null // Replace with the actual arXiv abstract URL when available.
+    project: "https://zju-omniai.github.io/VLA-Delta/",
+    arxiv: "https://arxiv.org/abs/2610.21306"
   },
   citation: {
     entryType: "misc",
-    key: "vla_delta",
-    provisional: true,
-    // Title and authors are derived from the confirmed metadata above.
-    // Add year, journal, eprint, archivePrefix and url only when confirmed.
-    fields: { note: "Manuscript" }
+    key: "lu2026vladeltalearningphysicalstate",
+    provisional: false,
+    // Matches the arXiv-provided BibTeX entry.
+    fields: {
+      title: "VLA-$\\Delta$: Learning Physical State Transition for Vision-Language-Action Models",
+      author: "Qi Lu and Jiarun Li and Ce Zhang and Miao Pan and Yi Pan and Xu Wang and Wenqi Zhang and Xuhong Zhang",
+      year: "2026",
+      eprint: "2610.21306",
+      archivePrefix: "arXiv",
+      primaryClass: "cs.CV",
+      url: "https://arxiv.org/abs/2610.21306"
+    }
   },
   figures: {
     // Each base has .png, .webp and -1200.webp variants. Sizes are pixels.
@@ -78,12 +85,12 @@ window.VLA_DELTA_SITE = {
     src: "assets/videos/motivation/microwave-bowl-failure.mp4?v=20261014-contact-v1",
     poster: "assets/videos/motivation/microwave-bowl-poster.png?v=20261014-contact-v1"
   },
-  // Featured paper introduction, with its original English narration and embedded subtitles.
+  // Featured introduction video.
   // Manual playback; keep the matching static HTML fallback in sync.
   heroVideo: {
-    src: "Video/vla-delta-intro-en/vla-delta-intro-en.mp4?v=20261014-hero-intro",
-    poster: "Video/vla-delta-intro-en/cover.png?v=20261014-hero-intro",
-    title: "VLA-Δ paper introduction with English narration",
+    src: "Video/introduction.mp4?v=20261016-introduction",
+    poster: "Video/introduction.png?v=20261016-introduction",
+    title: "VLA-Δ introduction video",
     width: 1920,
     height: 1080,
     description: ""

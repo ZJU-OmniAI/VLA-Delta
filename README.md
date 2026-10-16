@@ -2,16 +2,24 @@
   <h1><img src="docs/assets/images/logo.png" alt="VLA-Δ logo" width="64" height="64" align="absmiddle">&nbsp; VLA-Δ</h1>
   <h3>Learning Physical State Transition for Vision-Language-Action Models</h3>
   <p>
-    <!-- TODO: Replace this href with the paper URL. -->
-    <a href="#resource-links" title="Paper — coming soon"><img src="https://img.shields.io/badge/arXiv-Paper-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="Paper — coming soon"></a>
+    <a href="https://arxiv.org/abs/2610.21306" title="arXiv"><img src="https://img.shields.io/badge/arXiv-Paper-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="arXiv paper"></a>
     <a href="https://zju-omniai.github.io/VLA-Delta/" title="Project page"><img src="https://img.shields.io/badge/-Project_Page-0F5354?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="Project page"></a>
-    <!-- TODO: Replace this href with the Hugging Face URL. -->
-    <a href="#resource-links" title="Hugging Face — coming soon"><img src="https://img.shields.io/badge/-Hugging_Face-FFD21E?style=for-the-badge&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face — coming soon"></a>
+    <a href="https://huggingface.co/t0rn0d0" title="Hugging Face"><img src="https://img.shields.io/badge/-Hugging_Face-FFD21E?style=for-the-badge&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face"></a>
+    <a href="https://modelscope.cn/profile/t0rn0d0" title="ModelScope"><img src="https://img.shields.io/badge/-ModelScope-624AFF?style=for-the-badge&amp;logo=modelscope&amp;logoColor=white" alt="ModelScope"></a>
+  </p>
+  <p>
+    <a href="#environment-setup"><img src="https://img.shields.io/badge/Python-3.10-3776AB?logo=python&amp;logoColor=white" alt="Python 3.10"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-2F855A" alt="Apache-2.0 license"></a>
   </p>
   <a id="resource-links"></a>
-  <p><sub>Paper and Hugging Face links coming soon.</sub></p>
 </div>
 
+<p align="center">
+  <video controls preload="metadata" width="100%" poster="docs/project-page/Video/introduction.png" aria-label="VLA-Δ introduction video">
+    <source src="docs/project-page/Video/introduction.mp4" type="video/mp4">
+    <a href="docs/project-page/Video/introduction.mp4"><img src="docs/project-page/Video/introduction.png" alt="VLA-Δ introduction video" width="100%"></a>
+  </video>
+</p>
 
 ## 🧭 Overview
 
@@ -82,9 +90,9 @@ Install the LIBERO and RoboTwin simulation dependencies in separate environments
 
 | Resource | Type | Download |
 | --- | --- | --- |
-| vla-delta-base | Model | [VLA-Delta-base](https://modelscope.cn/models/t0rn0d0/VLA-Delta-base/files) |
-| vla-delta-libero | Model | [VLA-Delta-libero](https://modelscope.cn/models/t0rn0d0/VLA-Delta-libero/files) |
-| vla-delta-robotwin | Model | [VLA-Delta-robotwin](https://modelscope.cn/models/t0rn0d0/VLA-Delta-robotwin) |
+| vla-delta-base | Model | [VLA-Delta-base](https://huggingface.co/t0rn0d0/VLA-Delta-base) |
+| vla-delta-libero | Model | [VLA-Delta-libero](https://huggingface.co/t0rn0d0/VLA-Delta-libero) |
+| vla-delta-robotwin | Model | [VLA-Delta-robotwin](https://huggingface.co/t0rn0d0/VLA-Delta-robotwin) |
 | libero | Dataset | [HuggingFaceVLA/libero](https://huggingface.co/datasets/HuggingFaceVLA/libero) |
 | robotwin | Dataset | [TianxingChen/RoboTwin2.0](https://huggingface.co/datasets/TianxingChen/RoboTwin2.0) |
 | zr0-base | Model | [seeklhy/ZR-0](https://www.modelscope.cn/models/seeklhy/ZR-0) |
@@ -182,7 +190,19 @@ python scripts/train.py --config configs/pretrain/stage3_joint.yaml --execute
 
 ## 5. 📝 Citation
 
-The arXiv paper link and BibTeX entry will be added here.
+If you find this work useful, please cite:
+
+```bibtex
+@misc{lu2026vladeltalearningphysicalstate,
+      title={VLA-$\Delta$: Learning Physical State Transition for Vision-Language-Action Models},
+      author={Qi Lu and Jiarun Li and Ce Zhang and Miao Pan and Yi Pan and Xu Wang and Wenqi Zhang and Xuhong Zhang},
+      year={2026},
+      eprint={2610.21306},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2610.21306},
+}
+```
 
 ## 6. 🙏 Acknowledgements
 
