@@ -15,10 +15,9 @@
 </div>
 
 <p align="center">
-  <a href="docs/project-page/Video/introduction.mp4">
-    <img src="docs/project-page/Video/introduction.png" alt="VLA-Δ introduction video" width="100%">
-  </a><br>
-  <sub>▶ Click the cover to watch the introduction video.</sub>
+  <a href="https://zju-omniai.github.io/VLA-Delta/Video/introduction.mp4">
+    <img src="https://zju-omniai.github.io/VLA-Delta/Video/introduction.png" width="90%" alt="VLA-Δ project introduction">
+  </a>
 </p>
 
 ## 🧭 Overview
