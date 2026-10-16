@@ -15,10 +15,10 @@
 </div>
 
 <p align="center">
-  <video controls preload="metadata" width="100%" poster="docs/project-page/Video/introduction.png" aria-label="VLA-Δ introduction video">
-    <source src="docs/project-page/Video/introduction.mp4" type="video/mp4">
-    <a href="docs/project-page/Video/introduction.mp4"><img src="docs/project-page/Video/introduction.png" alt="VLA-Δ introduction video" width="100%"></a>
-  </video>
+  <a href="docs/project-page/Video/introduction.mp4">
+    <img src="docs/project-page/Video/introduction.png" alt="VLA-Δ introduction video" width="100%">
+  </a><br>
+  <sub>▶ Click the cover to watch the introduction video.</sub>
 </p>
 
 ## 🧭 Overview
