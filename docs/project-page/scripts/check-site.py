@@ -152,9 +152,9 @@ def main():
         require(header[:8] == b"\x89PNG\r\n\x1a\n", f"Expected PNG fallback: {file}")
         dimensions = struct.unpack(">II", header[16:24])
         require(dimensions == (int(image["width"]), int(image["height"])), f"Incorrect image dimensions: {file}")
-    for key in ("code", "arxiv"):
+    for key in ("github", "huggingface", "project", "arxiv"):
         tag, attrs = page.resources[key]
-        require(tag == "span" and "href" not in attrs and attrs.get("aria-disabled") == "true", f"Unavailable {key} must not be a link")
+        require(tag == "a" and bool(attrs.get("href")), f"Resource {key} must be a link")
     require("<iframe" not in html, "No unconfigured embedded player may be rendered")
     for video in page.videos:
         require(bool(video.get("src")), "Video must reference a real file")
@@ -170,7 +170,7 @@ def main():
             require("loop" in video, "Real-robot demonstrations need looping playback")
         require(bool(video.get("aria-label")), "Video needs an accessible title")
         require(int(video.get("width", 0)) > 0 and int(video.get("height", 0)) > 0, "Video needs dimensions")
-    print(f"PASS: local resources, anchors, {len(page.images)} image descriptions/dimensions and unavailable resource states")
+    print(f"PASS: local resources, anchors, {len(page.images)} image descriptions/dimensions and resource links")
     if args.source:
         source = args.source.resolve()
         title = re.search(r"\\title\{(.+)\}", (source / "main.tex").read_text()).group(1)

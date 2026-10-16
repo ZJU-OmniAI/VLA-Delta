@@ -5,8 +5,8 @@
 !/.gitignore
 !/.nojekyll
 !/PUBLISHING.md
-!/Video/vla-delta-intro-en/cover.png
-!/Video/vla-delta-intro-en/vla-delta-intro-en.mp4
+!/Video/introduction.mp4
+!/Video/introduction.png
 !/assets/charts/real-robot-results.svg
 !/assets/css/style.css
 !/assets/images/annotation-pipeline.svg
