@@ -14,6 +14,10 @@
   <a id="resource-links"></a>
 </div>
 
+## Media Coverage · 媒体报道
+
+- **量子位 · 2026.11** — [2B模型拿下98.4%成功率！浙大VLA新成果让机器人学会状态变化](https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247944089&idx=3&sn=921607acca3d33beb525df750c81272b&chksm=e9251f0e49a96bc5bc031302fd92ceb5984e597eb46cebeb469be0107602844b039915dec49e#rd)
+
 ## 🎬 Introduction Video
 
 https://github.com/user-attachments/assets/764a646e-3b67-4933-b7dc-e46640f3909e
