@@ -9,6 +9,7 @@ from lerobot.common.datasets.lerobot_dataset import LeRobotDatasetMetadata
 from model import ZR0Model
 from utils.load_training_dataset import prepare_qwen_vl_inputs_cpu, prepare_action_expert_inputs_cpu, custom_collate_fn
 from utils.obs_buffer import ObservationBuffer
+from utils.device import get_default_device
 from utils.constants import DATASET2FEATURE
 from utils.dataset_spec import (
     denormalize_actions,
@@ -31,7 +32,7 @@ class ZR0Policy(BasePolicy):
         window_size,
         num_denoised_steps=5,
         max_pad_state_and_action_length=64,
-        device="cuda:0",
+        device=None,
         use_difference_query=None,
         num_difference_queries=None,
         vlm_attention_backend=None,
@@ -49,7 +50,7 @@ class ZR0Policy(BasePolicy):
         self.window_size = window_size
         self.num_denoised_steps = num_denoised_steps
         self.max_pad_state_and_action_length = max_pad_state_and_action_length
-        self.device = device
+        self.device = device if device is not None else get_default_device()
         self.inference_mode = inference_mode
         self.prompt_suffix = "" if inference_mode == "direct_action" else "Sub task:"
 
@@ -102,7 +103,7 @@ class ZR0Policy(BasePolicy):
             num_difference_queries=num_difference_queries,
             vlm_attention_backend=vlm_attention_backend,
             action_conditioning_norm=action_conditioning_norm,
-        ).to(device).to(torch.bfloat16)
+        ).to(self.device).to(torch.bfloat16)
         self.model.eval()
 
         inference_requirements = resolve_objective_requirements(

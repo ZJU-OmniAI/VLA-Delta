@@ -89,6 +89,24 @@ python -m pip install -r requirements/train.txt
 
 Install the LIBERO and RoboTwin simulation dependencies in separate environments. See the [LIBERO evaluation guide](evaluation/libero/README.md) and [RoboTwin evaluation guide](evaluation/robotwin/README.md) for installation instructions.
 
+### Run on Intel GPU (XPU)
+
+The model server also runs on Intel GPUs (for example Intel Arc Pro B60) through PyTorch's XPU backend. It needs a current Intel GPU driver; see [Getting Started on Intel GPU](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html). Create the `vla-delta` environment as above, but install PyTorch from the XPU index:
+
+```bash
+python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/xpu
+python -m pip install -r requirements/train.txt
+```
+
+Then start the model server with `--device xpu`. Without `--device`, the server picks CUDA, then Intel XPU, then CPU. The simulation clients run unchanged.
+
+```bash
+export VLA_EVAL_CHECKPOINT="$PWD/checkpoints/VLA-Delta-libero"
+python server.py --config configs/eval/libero_server.yaml --device xpu
+```
+
+Only inference is supported on XPU. Training (DeepSpeed) and the optional FlashAttention 2 backend remain CUDA only, and the RoboTwin simulation environment still needs CUDA for its CuRobo and PyTorch3D builds.
+
 ### 📦 Data and Checkpoints
 
 | Resource | Type | Download |
