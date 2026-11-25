@@ -580,7 +580,11 @@ def build_server_parser() -> argparse.ArgumentParser:
         help="the pre-registration dataset entry in dataset2feature.yaml",
     )
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--device", default="cuda:0")
+    parser.add_argument(
+        "--device",
+        default=None,
+        help="Inference device such as cuda:0, xpu:0 or cpu; defaults to CUDA, then Intel XPU, then CPU.",
+    )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--compile_model", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--ckpt_dir", type=str, help="checkpoint directory")
